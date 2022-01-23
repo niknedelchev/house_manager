@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+	<h3>Edit the apartment</h3>
+	
+	 <form action="#" class="w-50" th:action="@{/apartments/edit/{id}(id=${apartment.id})}" th:object="${apartment}" th:method="post">
+     	<div class="form-group">
+		  	<input type="hidden" class="form-control" th:field="*{floor}" />
+	         <label id="Pet">Is there pet?</label>
+	        <select id="Pet" class="form-control" th:field="*{hasPet}">
+			    <option value="true" th:text="yes"></option>
+			    <option value="false" th:text="no"></option>
+			</select>
+        	<input type="hidden" class="form-control" th:field="*{size}" />
+	        <input type="hidden" class="form-control" th:field="*{building}" />
+	 		<label id="Owner">Select owner</label>
+	        <select id="Owner" class="form-control" th:field="*{owner}">
+			    <option th:each="owner : ${owners}" th:value="${owner.id}" th:text="${owner.name}"></option>
+			</select>
+			<br>
+  		    <p><input type="submit" class="btn btn-secondary" value="Edit" /></p>
+  	 		
+	    </div>
+    </form>
+	</div>
+	</main>
+	<hr>
+	
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

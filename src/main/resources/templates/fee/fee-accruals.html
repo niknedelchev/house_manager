@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+
+			<h1>Fee accruals</h1>
+			<p class="w-75">Choose the servicing employee and accrue fees to
+				be paid per apartment for the particular month/year. Choose the
+				current employee, and select month and year to accrue the fees for
+				all apartments serviced by that employee.</p>
+			<br />
+
+
+			<form action="#" class="w-50" th:action="@{/new-fee-accrual}"
+				method="GET">
+				<div class="form-group">
+					<label for="yearsDropDown">Select year:</label> 
+					<select name="year"	id="yearsDropDown" class="form-control">
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+						<option value="2021">2021</option>
+						<option value="2022">2022</option>
+						<option value="2022">2023</option>
+						<option value="2022">2024</option>
+						<option value="2022">2025</option>
+					</select> 
+					<label for="monthsDropDown">Select month:</label> 
+					<select	id="monthsDropDown" name="month" class="form-control">
+						<option value="1">January</option>
+						<option value="2">February</option>
+						<option value="3">March</option>
+						<option value="4">April</option>
+						<option value="5">May</option>
+						<option value="6">June</option>
+						<option value="7">July</option>
+						<option value="8">August</option>
+						<option value="9">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select> 
+					<label for="employeeDropDown">Select employee:</label> 
+					<select	name="employee" id="employeeDropDown" class="form-control">
+						<option th:each="employee : ${employees}"
+							th:value="${employee.id}" th:text="${employee.name}">
+						</option>
+					</select> 
+					<br>
+					<p>
+						<input type="submit" class="btn btn-secondary"
+							value="Accrue fees" />
+					</p>
+				</div>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

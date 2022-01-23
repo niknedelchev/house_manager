@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+
+	<h3>Edit the fee</h3>
+	
+	 <form action="#" class="w-50" th:action="@{/fees/edit/{id}(id=${fee.id})}" th:object="${fee}" th:method="post">
+        <p>Amount due: <input type="text" class="form-control" th:field="*{amountDue}" /></p>
+        <p>Amount received: <input type="text" class="form-control" th:field="*{amountReceived}" /></p>
+        <p>Date: <input type="text" class="form-control" th:field="*{issueDate}" /></p>
+        <p>Apartment: <input type="text" class="form-control" th:field="*{apartment}" /></p>
+        <p><input type="submit" class="btn btn-secondary" value="Update" /></p>
+    </form>
+
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

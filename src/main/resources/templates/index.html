@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+
+<body>
+	<main role="main">
+
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3">House Manager app</h1>
+				<p>This app facilitates the management activities of companies
+					that carry out professional activities for the maintenance of
+					condominiums in multifamily buidlings.</p>
+			</div>
+		</div>
+
+		<div class="container operations">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Companies</h2>
+					<p>The companies section provides the following operations:
+						add, edit, delete companies. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/companies}" role="button">Companies
+							operations</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Buildings</h2>
+					<p>The buildings section provides the following operations:
+						add, edit, delete buildings. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/buildings}" role="button">Buildings
+							operations</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Owners</h2>
+					<p>The owners section provides the following operations: add,
+						edit, delete owners. Go to operations by clicking the button
+						below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/owners}" role="button">Owners
+							operations</a>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Occupants</h2>
+					<p>The occupants section provides the following operations:
+						add, edit, delete companies. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/occupants}" role="button">Occupants
+							operations</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Employees</h2>
+					<p>The employees section provides the following operations:
+						add, edit, delete employees. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/employees}" role="button">Employees
+							operations</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Service contract</h2>
+					<p>Conclusion of a contract determines the companies and
+						employees servicing particular buildings.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/service-contract}"
+							role="button">Service contracts</a>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Fee accruals</h2>
+					<p>Fee accruals to occupants. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/fee-accruals}"
+							role="button">Fee accruals</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Fee payments</h2>
+					<p>Fee payments by occupants. Go to operations by clicking the
+						button below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/fee-payments}"
+							role="button">Fee payments</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Reports</h2>
+					<p>The reports section has various reports, filtering and
+						sorting options. To go to reports click below.</p>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/reports}" role="button">Reports</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

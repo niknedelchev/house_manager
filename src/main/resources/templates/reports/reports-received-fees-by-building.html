@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<div class="row">
+				<div class="col">
+					<a class="btn btn-secondary"
+						th:href="@{/reports/received-fees?reportBy=building}">By
+						building</a>
+				</div>
+				<div class="col">
+					<a class="btn btn-secondary"
+						th:href="@{/reports/received-fees?reportBy=company}">By
+						company</a>
+				</div>
+				<div class="col">
+					<a class="btn btn-secondary"
+						th:href="@{/reports/received-fees?reportBy=employee}">By
+						employee</a>
+				</div>
+			</div>
+			<br>
+			<br>
+
+			<h1>Reports: Received fees by building</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Building id</th>
+						<th>Building address</th>
+						<th>Total received fees</th>
+						<th>Additional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${buildingsAndReceivedFees.empty}">
+						<td colspan="2">No due fees</td>
+					</tr>
+					<tr th:each="item : ${buildingsAndReceivedFees}">
+						<td><span th:text="${item.key.id}"> </span></td>
+						<td><span th:text="${item.key.address}"> </span></td>
+						<td><span th:text="${item.value}"> </span></td>
+						<td><a
+							th:href="@{/fees?receivedByBuilding={id}(id=${item.key.id})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

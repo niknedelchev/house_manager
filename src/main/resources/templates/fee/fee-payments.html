@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+
+			<h1>Fee payments</h1>
+			<p class="w-75">First choose the occupant that has due fees. Then
+				select the due fee to be paid and proceed with the payment. Select
+				the payment date to reflect it in the database.</p>
+			<br />
+
+			<h3>1. Select occupant</h3>
+			<form action="#" class="w-50" th:action="@{/fee-payments}"
+				method="GET">
+				<div class="form-group">
+					<label for="occupantDropDown">Select occupant:</label> <select
+						id="occupantDropDown" class="form-control" name="occupantId">
+						<option th:each="occupant : ${occupants}"
+							th:value="${occupant.id}" th:text="${occupant.name}"></option>
+					</select>
+
+					<p>
+						<input type="submit" class="btn btn-secondary"
+							value="Select occupant" />
+					</p>
+				</div>
+			</form>
+
+			<h3>2. Select due fee to be paid</h3>
+			<form action="#" class="w-50" th:action="@{/new-fee-payment}"
+				method="GET">
+				<div class="form-group">
+					<label for="dueFeeDropDown">Select due fee:</label> <select
+						id="dueFeeDropDown" class="form-control" name="feeId">
+						<option th:each="dueFee : ${dueFees}" th:value="${dueFee.id}"
+							th:text="${dueFee.amountDue}"></option>
+					</select> <label for="payment-date">Payment date:</label> <input type="date"
+						class="form-control" id="payment-date" name="datePaid"
+						value="2021-12-31" min="2015-01-01" max="2025-12-31"> 
+						<input name="occupantId" type="hidden" th:value="${#request.getParameter('occupantId')}"
+						th:unless="${#request.getParameter('occupantId') == null}">
+					<p>
+						<input type="submit" class="btn btn-secondary"
+							value="Proceed with payment" />
+					</p>
+				</div>
+			</form>
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

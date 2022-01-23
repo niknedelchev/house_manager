@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+		<div th:if="${company ==null && employee==null && building == null && receivedByCompany ==null && receivedByEmployee==null && receivedByBuilding == null}" class="row general-row">
+				<div class="col-md-3">
+					<h5>Add fee</h5>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/fees/add}" role="button">Add fee</a>
+					</p>
+				</div>
+			</div>
+
+	<h1>Fees</h1>
+	<h3 th:if="${company !=null}" th:text="'Company: '+${company.name}"></h3>
+	<h3 th:if="${employee != null}" th:text="'Employee: '+${employee.name}" ></h3>
+	<h3 th:if="${building != null}" th:text="'Building: '+${building.address}" ></h3>
+	<h3 th:if="${receivedByCompany !=null}" th:text="'Company: '+${receivedByCompany.name}"></h3>
+	<h3 th:if="${receivedByEmployee != null}" th:text="'Employee: '+${receivedByEmployee.name}" ></h3>
+	<h3 th:if="${receivedByBuilding !=null}" th:text="'Building: '+${receivedByBuilding.address}" ></h3>
+	
+	<br />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Amount due</th>
+				<th>Amount received</th>
+				<th>Issue Date</th>
+				<th>Payment Date</th>
+				<th>Apartment</th>
+				<th>Building address</th>
+				<th>Employee</th>
+				<th>Company</th>
+				<th>Operations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${fees.empty}">
+				<td colspan="2">No fees available</td>
+			</tr>
+			<tr th:each="fee : ${fees}">
+				<td><span th:text="${fee.id}"> </span></td>
+				<td><span th:text="${fee.amountDue}"> </span></td>
+				<td><span th:text="${fee.amountReceived}"> </span></td>
+				<td><span th:text="${fee.issueDate}"> </span></td>
+				<td><span th:text="${fee.paymentDate}"> </span></td>
+				<td><span th:text="${fee.apartment.id}"> </span></td>
+	 			<td><span th:text="${fee.apartment.building.address}"> </span></td>
+	 			<td><span th:text="${fee.employee.name}"> </span></td>
+	 			<td><span th:text="${fee.employee.serviceCompany.name}"> </span></td>
+				<td>
+					<a th:href="@{/fees/edit/{id}(id=${fee.id})}">Edit</a>
+					<a th:href="@{/fees/delete/{id}(id=${fee.id})}">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

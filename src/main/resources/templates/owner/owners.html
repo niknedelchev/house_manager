@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+	<div class="row general-row">
+		<div class="col-md-3">
+			<h5>Add owner</h5>
+				<p>
+					<a class="btn btn-secondary" th:href="@{/owners/add}" role="button">Add owner</a>
+				</p>
+		</div>
+	</div>
+	
+	<h1>Owners</h1>
+	<br />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${owners.empty}">
+				<td colspan="2">No owners available</td>
+			</tr>
+			<tr th:each="owner : ${owners}">
+				<td><span th:text="${owner.id}"> </span></td>
+				<td><span th:text="${owner.name}"> </span></td>
+				<td><span th:text="${owner.age}"> </span></td>
+				<td><a th:href="@{/owners/edit/{id}(id=${owner.id})}">Edit</a></td>
+				<td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

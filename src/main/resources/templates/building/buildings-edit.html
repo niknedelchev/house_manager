@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+	<h3>Edit the building</h3>
+	
+	 <form action="#" class="w-50" th:action="@{/buildings/edit/{id}(id=${building.id})}" th:object="${building}" th:method="post">
+        <p>Address: <input type="text" class="form-control" th:field="*{address}" /></p>
+        <p>Common area: <input type="text" class="form-control" th:field="*{commonAreaSize}" /></p>
+        <p>Total floors: <input type="text" class="form-control" th:field="*{totalFloors}" /></p>
+        <p><input type="submit" class="btn btn-secondary" value="Update" /></p>
+    </form>
+
+	</div>
+	</main>
+	<hr>
+	
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

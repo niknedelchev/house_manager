@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<div class="row general-row">
+				<div class="col-md-2">
+					<h5>Add employee</h5>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/employees/add}"
+							role="button">Add employee</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h5>Filter: min buildings count</h5>
+					<form action="/employees" method="GET">
+						<div class=row>
+							<div class="col-md-2">
+								<input type="text" placeholder="Minimal count"
+									name="minBuildingsCount" />
+							</div>
+							<div class="col-md-2 offset-3">
+								<input class="btn btn-secondary" type="submit" value="Filter" />
+							</div>
+							<div class="col-md-2">
+								<a class="btn btn-secondary ml-3" th:href="@{/employees}"
+									role="button">Clear</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3">
+					<h5>Sort by:</h5>
+					<form action="/employees" method="GET">
+						<div class=row>
+							
+							<input type="hidden" name="company"
+							th:value="${#httpServletRequest.getParameter('company')}" 
+    						th:unless="${#httpServletRequest.getParameter('company') == null}" />
+						
+							<div class="col-sm-5">
+								<select class="form-control" name="sortBy" id="sortBy">
+									<option value="buildings">Buildings</option>
+									<option value="name">Name</option>
+									<option value="nameAndBuildings">Both</option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<input class="btn btn-secondary mr-2" type="submit" value="Sort" />
+							</div>
+							<div class="col-sm-2 offset-1">
+								<a class="btn btn-secondary ml-2" th:href="@{/employees}"
+									role="button">Clear</a>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="col-md-3">
+					<h5>Filter by company</h5>
+					<form action="/employees" method="GET">
+						<div class=row>
+							<div class="col-sm-5">
+								<input type="hidden" name="sortBy"
+								th:value="${#httpServletRequest.getParameter('sortBy')}" 
+     							th:unless="${#httpServletRequest.getParameter('sortBy') == null}" />
+								
+								<select class="form-control" name="company" id="company">
+									<option th:each="company: ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<input class="btn btn-secondary mr-2" type="submit" value="Select" />
+							</div>
+							<div class="col-sm-2 offset-1">
+								<a class="btn btn-secondary ml-2" th:href="@{/employees}"
+									role="button">Clear</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<h1>Employees</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Company</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${employees.empty}">
+						<td colspan="2">No employees available</td>
+					</tr>
+					<tr th:each="employee : ${employees}">
+						<td><span th:text="${employee.id}"> </span></td>
+						<td><span th:text="${employee.name}"> </span></td>
+						<td><span th:text="${employee.serviceCompany.name}"> </span></td>
+						<td><a th:href="@{/employees/edit/{id}(id=${employee.id})}">Edit</a></td>
+						<td><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

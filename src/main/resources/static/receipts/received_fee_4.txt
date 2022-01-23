@@ -1,0 +1,6 @@
+Service company: Company A
+Employee: Angel Angelov
+Building: 1, address: Sofia
+Apartment: 4, floor: 2
+Received amount: 1419.20
+Date received: 2021-12-31

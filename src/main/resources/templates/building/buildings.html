@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+		<div th:if="${company ==null && employee==null}" class="row general-row">
+				<div class="col-md-2">
+					<p>
+						<a class="btn btn-secondary" th:href="@{/buildings/add}" role="button">Add building</a>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<p>
+						<a class="btn btn-secondary" th:href="@{/buildings}" role="button">All buildings</a>
+					</p>
+				</div>
+
+			</div>
+
+	<h1>Buildings</h1>
+	<h3 th:if="${company !=null}" th:text="'Company: '+${company.name}"></h3>
+	<h3 th:if="${employee != null}" th:text="'Employee: '+${employee.name}" ></h3>
+
+	<br />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Address</th>
+				<th>Apartments Area</th>
+				<th>Common Area</th>
+				<th>Total Area</th>
+				<th>Total floors</th>
+			 	<th>Servicing company</th>
+				<th>Servicing employee</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${buildings.empty}">
+				<td colspan="2">No companies available</td>
+			</tr>
+			<tr th:each="building : ${buildings}">
+				<td><span th:text="${building.id}"> </span></td>
+				<td><span th:text="${building.address}"> </span></td>
+				<td><span th:text="${building.apartmentsAreaSize}"> </span></td>
+				<td><span th:text="${building.commonAreaSize}"> </span></td>
+				<td><span th:text="${building.totalAreaSize}"> </span></td>
+				<td><span th:text="${building.totalFloors}"> </span></td>
+			  	<td><span th:text="${building.serviceEmployee} ? ${building.serviceEmployee.serviceCompany.name}"> </span></td>
+			 	<td><span th:text="${building.serviceEmployee} ? ${building.serviceEmployee.name} : ''"> </span></td>
+				<td><a th:href="@{/buildings/edit/{id}(id=${building.id})}">Edit</a></td>
+				<td><a th:href="@{/buildings/delete/{id}(id=${building.id})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

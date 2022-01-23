@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+	<h3>Edit the owner</h3>
+	
+	 <form action="#" class="w-50"  th:action="@{/owners/edit/{id}(id=${owner.id})}" th:object="${owner}" th:method="post">
+ 	     <p>Name: <input type="text" class="form-control" th:field="*{name}" /></p>
+         <p>Age: <input type="text" class="form-control" th:field="*{age}" /></p>
+        <p><input type="submit" class="btn btn-secondary" value="Update" /></p>
+    </form>
+	
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

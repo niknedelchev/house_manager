@@ -1,0 +1,16 @@
+.operations p {
+text-align: justify;	
+}
+
+main {
+	min-height: 550px;
+}
+
+.general-list-view{
+	margin-top:50px;
+}
+
+.general-row a, input {
+	min-width: 75px;
+	margin-bottom:20px;
+}

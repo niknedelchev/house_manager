@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+			<div th:if="${building==null}" class="row general-row">
+				<div class="col-md-2">
+					<h5>Add occupant</h5>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/occupants/add}"
+							role="button">Add occupant</a>
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h5>Filter: min age</h5>
+					<form action="/occupants" method="GET">
+						<div class=row>
+							<div class="col-sm-5">
+								<input type="text" placeholder="Minimal age"
+									name="minAge" />
+							</div>
+							<div class="col-sm-2 ml-3">
+								<input class="btn btn-secondary" type="submit" value="Filter" />
+							</div>
+							<div class="col-sm-2 ml-3">
+								<a class="btn btn-secondary" th:href="@{/occupants}"
+									role="button">Clear</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3">
+					<h5>Sort by: name</h5>
+					<form action="/occupants" method="GET">
+						<div class=row>
+							<input type="hidden" name="sortBy" value="name"></input>
+							<div class="col-sm-2 mr-2">
+								<input class="btn btn-secondary" type="submit" value="Sort" />
+							</div>
+							<div class="col-sm-2 offset-1">
+								<a class="btn btn-secondary" th:href="@{/occupants}"
+									role="button">Clear</a>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="col-md-3">
+				<h5>Filter by building</h5>
+				<form action="/occupants" method="GET">
+					<div class=row>
+				        <select id="Owner" class="form-control col-sm-5" name="building">
+						    <option th:each="building : ${buildings}" th:value="${building.id}" th:text="${building.address}"></option>
+						</select>
+						<div class="col-sm-2">
+				        	<p><input type="submit" class="btn btn-secondary" value="Select" /></p>
+						</div>
+						<div class="col-sm-2 ml-5">
+							<a class="btn btn-secondary" th:href="@{/occupants}"
+									role="button">Clear</a>
+						</div>
+	
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+
+<div class="container">	
+	<h1>Occupants</h1>
+	<h3 th:if="${building!=null}" th:text="'Building: '+${building.address}"></h3>
+	<br />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Age</th>
+				<th>Name</th>
+				<th>Apartment</th>
+				<th>Apartment address</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${occupants.empty}">
+				<td colspan="2">No occupants available</td>
+			</tr>
+			<tr th:each="occupant : ${occupants}">
+				<td><span th:text="${occupant.id}"> </span></td>
+				<td><span th:text="${occupant.age}"> </span></td>
+				<td><span th:text="${occupant.name}"> </span></td>
+				<td><span th:text="${occupant.apartment.id}"> </span></td>
+				<td><span th:text="${occupant.apartment.building.address}"> </span></td>
+				<td><a th:href="@{/occupants/edit/{id}(id=${occupant.id})}">Edit</a></td>
+				<td><a th:href="@{/occupants/delete/{id}(id=${occupant.id})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

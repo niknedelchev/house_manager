@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+
+	<h3>Add a new service company</h3>
+
+	
+	 <form class="w-50" action="#" th:action="@{/companies/add}" th:object="${serviceCompany}" method="post">
+	 	<div class="form-group">
+        <p>Name: <input type="text" class="form-control" th:field="*{name}" /></p>
+        <p><input type="submit" class="btn btn-secondary" value="Add" /></p>
+        </div>
+    </form>
+	
+	</div>
+	</main>
+	<hr>
+	
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

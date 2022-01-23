@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<h1>Reports: Occupants in buildings</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Address</th>
+						<th>Total occupants</th>
+						<th>Additional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${buildingsAndOccupants.empty}">
+						<td colspan="2">No occupants in buildings available</td>
+					</tr>
+					<tr th:each="item : ${buildingsAndOccupants}">
+						<td><span th:text="${item.key.id}"> </span></td>
+						<td><span th:text="${item.key.address}"> </span></td>
+						<td><span th:text="${item.value.size}"> </span></td>
+						<td><a
+							th:href="@{/occupants?building={id}(id=${item.key.id})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container  general-list-view">
+
+			<h1>Reports: Serviced buildings by each employee</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Company</th>
+						<th>Total serviced buildings</th>
+						<th>Additional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${employees.empty}">
+						<td colspan="2">No employees available</td>
+					</tr>
+					<tr th:each="employee : ${employees}">
+						<td><span th:text="${employee.id}"> </span></td>
+						<td><span th:text="${employee.name}"> </span></td>
+						<td><span th:text="${employee.serviceCompany.name}"> </span></td>
+						<td><span th:text="${employee.buildings.size}"> </span></td>
+						<td><a th:href="@{/buildings?employee={id}(id=${employee.id})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

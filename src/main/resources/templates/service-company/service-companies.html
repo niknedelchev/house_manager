@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+	
+		<div class="row general-row">
+				<div class="col-md-3">
+					<h5>Add company</h5>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/companies/add/}" role="button">Add company</a>
+					</p>
+				</div>
+				<div class="col-md-5">
+					<h5>Filter: revenue at least</h5>
+					<form action="/companies" method="GET">
+	       				 <div class=row>
+	       				 	<div class="col-sm-5"><input type="text" placeholder="Amount" name="feesAtleast"/></div>
+	       				 	<div class="col-sm-2"><input class="btn btn-secondary" type="submit" value="Filter" /></div>
+	       				 	<div class="col-sm-2"> <a class="btn btn-secondary" th:href="@{/companies}" role="button">Clear</a></div>
+	       				 </div>
+	       			</form>
+				</div>
+				<div class="col-md-4">
+					<h5>Sort by: revenue (ASC)</h5>
+					<form action="/companies" method="GET">
+	       				 <input type="hidden" name="sortBy" value="revenue">
+	       				 <div class=row>
+	       				 	<div class="col-sm-2"><input class="btn btn-secondary" type="submit" value="Sort" /></div>
+	       				 	<div class="col-sm-2 offset-1"> <a class="btn btn-secondary" th:href="@{/companies}" role="button">Clear</a></div>
+	       				 </div>
+	       			</form>
+				</div>
+			</div>
+	
+	<h1>Service companies</h1>
+	<br />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Collected fees</th>
+				<th>Edit</th>
+				<th>Delete</th>
+				<th>Additional</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${companies.empty}">
+				<td colspan="2">No companies available</td>
+			</tr>
+			<tr th:each="instance : ${companies}">
+				<td><span th:text="${instance.key.id}"> </span></td>
+				<td><span th:text="${instance.key.name}"> </span></td>
+				<td><span th:text="${instance.value}"> </span></td>
+				<td><a th:href="@{/companies/edit/{id}(id=${instance.key.id})}">Edit</a></td>
+				<td><a th:href="@{/companies/delete/{id}(id=${instance.key.id})}">Delete</a></td>
+				<td>
+				<a th:href="@{/employees?company={company}(company=${instance.key.id})}"> Employee list</a> |
+				<a th:href="@{/buildings?company={company}(company=${instance.key.id})}"> Buildings list</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

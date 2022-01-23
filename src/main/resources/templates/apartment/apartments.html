@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<div th:if="${building ==null}" class="row general-row">
+				<div class="col-md-3">
+					<h5>Add apartment</h5>
+					<p>
+						<a class="btn btn-secondary" th:href="@{/apartments/add}"
+							role="button">Add apartment</a>
+					</p>
+				</div>
+			</div>
+
+			<h1>Apartments</h1>
+			<h3 th:if="${building !=null}" th:text="'Buildinng: '+${building.address}"></h3>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Floor</th>
+						<th>Has pet</th>
+						<th>Size</th>
+						<th>Building</th>
+						<th>Owner</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${apartments.empty}">
+						<td colspan="2">No apartments available</td>
+					</tr>
+					<tr th:each="apartment : ${apartments}">
+						<td><span th:text="${apartment.id}"> </span></td>
+						<td><span th:text="${apartment.floor}"> </span></td>
+						<td><span
+							th:text="${apartment.hasPet} ? 'has pet' : 'no pet'"> </span></td>
+						<td><span th:text="${apartment.size}"> </span></td>
+						<td><span th:text="${apartment.building.address}"> </span></td>
+						<td><span th:text="${apartment.owner.name}"> </span></td>
+						<td><a th:href="@{/apartments/edit/{id}(id=${apartment.id})}">Edit</a></td>
+						<td><a
+							th:href="@{/apartments/delete/{id}(id=${apartment.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

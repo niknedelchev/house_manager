@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+
+			<h1>Service contract</h1>
+			<p class="w-75">Select both building and servicing company via
+				the menu below to set new service contract. This will set who is the
+				servicing employee of the particular building. When the new service
+				contract is signed, the employee with the least count of serviced
+				buildings gets it.</p>
+			<br />
+
+
+			<form action="#" class="w-50" th:action="@{/new-service-contract}" method="GET">
+				<div class="form-group">
+					<label for="buildingsDropDown">Select building:</label> 
+					<select name="building" id="buildingsDropDown" class="form-control">
+						<option th:each="building : ${buildings}"
+							th:value="${building.id}" th:text="${building.address}">
+						</option>
+					</select> <label for="companiesDropDown">Select company:</label> 
+					<select name="company" id="companiesDropDown" class="form-control">
+						<option th:each="company : ${companies}" th:value="${company.id}"
+							th:text="${company.name}">
+						</option>
+					</select> 
+					<br>
+					<p>
+						<input type="submit" class="btn btn-secondary"
+							value="Set service contract" />
+					</p>
+				</div>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

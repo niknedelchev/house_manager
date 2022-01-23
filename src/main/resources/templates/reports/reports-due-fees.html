@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+	<div class="container general-list-view">
+
+	<h1>Reports: Due fees</h1>
+	<br />
+
+
+	<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Building id</th>
+						<th>Building address</th>
+						<th>Total due fees</th>
+						<th>Additional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${buildingsAndDueFees.empty}">
+						<td colspan="2">No due fees</td>
+					</tr>
+					<tr th:each="item : ${buildingsAndDueFees}">
+						<td><span th:text="${item.key.id}"> </span></td>
+						<td><span th:text="${item.key.address}"> </span></td>
+						<td><span th:text="${item.value}"> </span></td>
+						<td><a
+							th:href="@{/reports/apartments-buildings/details/{id}(id=${item.key.id})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+	
+	
+	<div>
+		<div>
+			<div th:if="${buildingsAndDueFees != null}">
+				<div th:each="item : ${buildingsAndDueFees}">
+					<div>
+						<span>Building id:</span> <span th:text="${item.key.id}"></span> 
+						<span>Building address:</span> <span th:text="${item.key.address}"></span> 
+						<span>Total	due fees:</span> <span th:text="${item.value}"></span> 
+					</div>
+				</div>
+				<br />
+			</div>
+			<div th:if="${companiesAndDueFees!= null}">
+				<div th:each="item : ${companiesAndDueFees}">
+					<div>
+						<span>Company id:</span> <span th:text="${item.key.id}"></span> 
+						<span>Name:</span> <span th:text="${item.key.name}"></span> 
+						<span>Total	due fees:</span> <span th:text="${item.value}"></span> 
+					</div>
+				</div>
+				<br />
+			</div>
+			<div th:if="${employeesAndDueFees != null}">
+				<div th:each="item : ${employeesAndDueFees}">
+					<div>
+						<span>Employee id:</span> <span th:text="${item.key.id}"></span> 
+						<span>Name:</span> <span th:text="${item.key.name}"></span> 
+						<span>Total	due fees:</span> <span th:text="${item.value}"></span> 
+					</div>
+				</div>
+				<br />
+			</div>
+		</div>
+	</div>
+	
+	</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

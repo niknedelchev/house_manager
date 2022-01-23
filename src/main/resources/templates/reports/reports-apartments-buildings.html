@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<div><a th:href="@{/apartments}">See all apartments in all buildings</a></div>
+			<br />
+			
+			<h1>Reports: Apartments in buildings</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Address</th>
+						<th>Total apartments</th>
+						<th>Additional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${buildings.empty}">
+						<td colspan="2">No employees available</td>
+					</tr>
+					<tr th:each="building : ${buildings}">
+						<td><span th:text="${building.id}"> </span></td>
+						<td><span th:text="${building.address}"> </span></td>
+						<td><span th:text="${building.apartments.size}"> </span></td>
+						<td><a th:href="@{/apartments?building={id}(id=${building.id})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+			
+	
+		</div>
+	</main>
+	<hr>
+
+	<th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

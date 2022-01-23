@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+<div th:replace="fragments/header :: navbar" />
+
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<h1>Reports</h1>
+			<br>
+				<div class="row">
+					<div class="col-md-4">
+						<h2>9.a. Serviced buildings by employee report</h2>
+						<p>Serviced buildings by each employee in each company: total
+							buildings count per employee & list of buildings</p>
+						<p>
+							<a class="btn btn-secondary"
+								th:href="@{/reports/employees-buildings}" role="button">Go
+								to report</a>
+						</p>
+					</div>
+					<div class="col-md-4">
+						<h2>9.b. Apartments in buildings report</h2>
+						<p>Apartments in buildings: Total count of apartments in each
+							building & list of apartmetns in each building.</p>
+						<p>
+							<a class="btn btn-secondary"
+								th:href="@{/reports/apartments-buildings}" role="button">Go
+								to report</a>
+						</p>
+					</div>
+					<div class="col-md-4">
+						<h2>9.c Occupants in buildings report</h2>
+						<p>Occupants in buildings: Report shows total count of
+							occupants per building & list of occupants in each building.</p>
+						<p>
+							<a class="btn btn-secondary"
+								th:href="@{/reports/occupants-buildings}" role="button">Go
+								to report</a>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<h2>9.d Due fees</h2>
+						<p>Due fees reports for each company; for each building; for
+							each employee.</p>
+						<p>
+							<a class="btn btn-secondary"
+								th:href="@{/reports/due-fees}" role="button">Go
+								to report</a>
+						</p>
+					</div>
+					<div class="col-md-4">
+						<h2>9.e Received fees</h2>
+						<p>Received fees reports for each company; for each building;
+							for each employee.</p>
+						<p>
+							<a class="btn btn-secondary"
+								th:href="@{/reports/received-fees}" role="button">Go
+								to report</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments/footer :: footer" />
+
+</body>
+</html>
