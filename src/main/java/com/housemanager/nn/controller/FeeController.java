@@ -31,7 +31,7 @@ import com.housemanager.nn.repository.OccupantRepository;
 import com.housemanager.nn.repository.ServiceCompanyRepository;
 
 enum Fees {
-	STANDARD_FEE_FOR_APT_SIZE(4.99), EXTRA_FEE_OVER_7YRS_OLD(9.99), EXTRA_FEE_PET(11.99);
+	STANDARD_FEE_FOR_APT_SIZE(0.09), EXTRA_FEE_OVER_7YRS_OLD(0.99), EXTRA_FEE_PET(11.99);
 
 	private double fee;
 
